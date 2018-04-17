@@ -1,0 +1,6 @@
+{
+    "require": {
+        "ova777/mysqli": "^1.0",
+        "vlucas/valitron": "^1.4"
+    }
+}

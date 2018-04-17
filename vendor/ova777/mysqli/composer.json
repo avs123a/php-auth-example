@@ -1,0 +1,20 @@
+{
+    "name": "ova777/mysqli",
+    "description": "MYSQLi extension library",
+    "homepage": "http://github.com/ova777/mysqli",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["db", "mysql", "mysqli"],
+    "authors": [
+        {
+            "name": "Vyacheslav Ovchinnikov",
+            "email": "ova.nsk@gmail.com"
+        }
+    ],
+    "require": {},
+	"autoload": {
+		"psr-4": {
+			"ova777\\MYSQLi\\": "src/"
+		}
+	}
+}
