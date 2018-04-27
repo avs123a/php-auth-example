@@ -19,7 +19,8 @@ function check_unique($email, $login, $db1)
 	$row = $db1->command('SELECT * FROM user WHERE email=? OR login=?')
 	->bind('ss', array($email, $login))
 	->queryRow();
-	if($row){
+	if($row)
+	{
 		$_SESSION['signup_errors2'] = 'Login or email is using. Please , enter other login or email';
 		return false;
 	}
@@ -34,7 +35,15 @@ if(isset($_POST['user_register']))
 	$v = new Valitron\Validator($_POST);
 	
 	$rules = [
-	    'required' => ['user_email', 'user_login', 'user_rname', 'user_password', 'user_bdate', 'user_country', 'user_agreed'],
+		'required' => [
+			'user_email',
+			'user_login',
+			'user_rname',
+			'user_password',
+			'user_bdate',
+			'user_country',
+			'user_agreed'
+		],
 		'email' => 'user_email',
 		'date' => 'user_bdate',
 		'accepted' => 'user_agreed',
@@ -44,22 +53,25 @@ if(isset($_POST['user_register']))
 			['user_rname', 50],
 		],
 		'lengthBetween' => [
-		    ['user_login', 6, 30],
+			['user_login', 6, 30],
 			['user_password', 6, 50],
 		],
 	];
 	
-   // $v->rule('required', ['user_email', 'user_login', 'user_rname', 'user_password', 'user_bdate', 'user_country', 'user_agreed']);
-   // $v->rule('user_email', 'email');
-	//$v->rule('user_agreed', 'accepted');
-	//$v->rule('user_country', 'accepted');
-	//$v->rule('lengthMax ', []);
 	$v->rules($rules);
-    if($v->validate() && check_unique($_POST['user_email'], $_POST['user_login'], $db))
+	
+	if($v->validate() && check_unique($_POST['user_email'], $_POST['user_login'], $db))
 	{
 		//insert row in user table
 		$db->command('INSERT INTO user SET email=?, login=?, password=?, bdate=?, country_id=?, agreed=?, registered=?')
-		->bind('ssssiii', array($_POST['user_email'], $_POST['user_login'], $_POST['user_password'], $_POST['user_bdate'], $_POST['user_country'], 1, time()))
+		->bind('ssssiii', array(
+			$_POST['user_email'],
+			$_POST['user_login'],
+			$_POST['user_password'],
+			$_POST['user_bdate'],
+			$_POST['user_country'],
+			1, time())
+		)
 		->execute();
 		
 		//auto login
