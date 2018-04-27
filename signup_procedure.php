@@ -70,7 +70,8 @@ if(isset($_POST['user_register']))
 			$_POST['user_password'],
 			$_POST['user_bdate'],
 			$_POST['user_country'],
-			1, time())
+			1, time()
+			)
 		)
 		->execute();
 		
