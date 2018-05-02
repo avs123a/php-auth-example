@@ -1,24 +1,14 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../api/api.php';
 
-if(session_status() != PHP_SESSION_ACTIVE )
-	session_start();
-if(isset($_SESSION['signup_errors1']))
-	print_r($_SESSION['signup_errors1']);
-if(isset($_SESSION['signup_errors2']))
-	echo $_SESSION['signup_errors2'];
-
-if(isset($_SESSION['user_email']))
-{
-	header("Location: cabinet.php");
-	exit;
-}
+call_session();
+showRegisterErrors();
 
 $db = new \ova777\MYSQLi\Connection($host, $user, $password, $database);
 
 $countries = $db->command('SELECT * FROM country')->queryAll();
-
 ?>
 
 <!DOCTYPE HTML>
@@ -28,7 +18,7 @@ $countries = $db->command('SELECT * FROM country')->queryAll();
 	</head>
 	<body>
 		<h2>Register</h2>
-		<form name="register-form" action="/signup_procedure.php" method="post">
+		<form name="register-form" action="/src/signup_procedure.php" method="post">
 			<label for="email-field">Email: </label>
 			<input type="text" id="email-field" name="user_email" required /><br>
 			<label for="login-field">Login: </label>

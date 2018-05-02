@@ -1,5 +1,23 @@
 Simple PHP Authentification Example
 
+Directory structure:
+	- api
+		api.php   -  file with functions (register, check unique, login/logout, ... );
+	- config
+		db.php    -   file with database connection settings ( host, user, password, database);
+	- vendor(after composer installing) - folder for dependencies installed via composer;
+	- src  -  folder for main files
+		cabinet.php
+		login.php
+		login.html
+		logout.php
+		signup.php
+		signup_procedure.php
+		
+	- root directory:
+		.htaccess - routing rule
+
+		
 Requirements:
 - PHP >= 7.1
 - MariaDB >= 10.1
